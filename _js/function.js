@@ -1,8 +1,10 @@
-
-
+$(document).ready(function(){
 
   var button = $('.btn_quay');
   var circle = $('.circle');
+  var arrow = $('.line');
+
+  circle.css({"-webkit-animation-play-state" : "paused"});
 
   button.click(function(){
 
@@ -18,14 +20,19 @@
     var c = values[2];
     var d = values[3];
 
-    var scale = Math.sqrt(a*a + b*b);
-    var sin = b/scale;
-    var angle = Math.round(Math.asin(sin) * (180/Math.PI));
+    var angle = Math.round(Math.atan2(b, a) * (180/Math.PI));
 
     if (during == "paused") {
+      button.text("Stop");
       circle.css({"-webkit-animation-play-state" : "running"});
     } else {
+      button.text("Quay");
       circle.css({"-webkit-animation-play-state" : "paused"});
+      var arrowTop = arrow.offset().top,
+          arrowLeft = arrow.offset().left;
+      $('.result').text('Angel: ' + angle + "Top: " + arrowTop);
     }
 
   });
+
+});
